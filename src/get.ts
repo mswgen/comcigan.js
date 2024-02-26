@@ -81,10 +81,8 @@ export async function getTimetable(schoolCode: number, grade: number, classNum: 
     for (let i = 0; i < lastTimeData[0]; i++) {
         lastTimeDataArr.push(lastTimeData[i + 1].slice(1));
     }
-    const lastUpdated = timetable['자료' + updatedTimeName].split(/[- :]+/).map((x : string) => parseInt(x));
-    lastUpdated[1]--;
     const finalData: Timetable = {
-        lastUpdated: new Date(...(lastUpdated as [1, 2, 3, 4, 5, 6])),
+        lastUpdated: new Date(timetable['자료' + updatedTimeName].replace(' ', 'T') + '.000+0900'),
         timetable: []
     };
     for (let i = 0; i < timeDataArr.length; i++) {
