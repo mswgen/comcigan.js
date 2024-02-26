@@ -1,11 +1,13 @@
-export type Timetable = Array<
-    Array<{
-        subject: string,
-        teacher: string,
-        isChanged: boolean
-
-    }>
->;
+export type Timetable = {
+    lastUpdated: Date,
+    timetable: Array<
+        Array<{
+            subject: string,
+            teacher: string,
+            isChanged: boolean
+        }>
+    >
+};
 
 export class TimetableError extends Error {
     errorCode: number;

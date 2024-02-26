@@ -1,7 +1,7 @@
 import fetch from 'node-fetch';
 import iconv from 'iconv-lite';
-import { TimetableError } from './types';
-import type { Timetable } from './types';
+import { TimetableError } from './types.js';
+import type { Timetable } from './types.js';
 
 export async function getTimetable(schoolCode: number, grade: string, classNum: string): Promise<Timetable | TimetableError> {
     const stuPage = iconv.decode(Buffer.from(await fetch('http://112.186.146.81:4082/st').then(res => res.arrayBuffer())), 'euc-kr');
@@ -31,13 +31,10 @@ export async function getTimetable(schoolCode: number, grade: string, classNum: 
     if (!updatedTimeName) {
         return new TimetableError(0);
     }
-    console.log(`최근 업데이트: ${timetable['자료' + updatedTimeName]}`);
-    console.log(`이 학교에 총 ${timetable.학급수.length - 1}개의 학년이 있습니다.\n학년 숫자를 입력해주세요.`);
 
     if (parseInt(grade) > timetable.학급수.length - 1) {
         return new TimetableError(1);
     }
-    console.log(`이 학년에 총 ${timetable.학급수[parseInt(grade)] - timetable.가상학급수[parseInt(grade)]}개의 반이 있습니다.\n반 숫자를 입력해주세요.`);
     if (parseInt(classNum) > timetable.학급수[parseInt(grade)] - timetable.가상학급수[parseInt(grade)]) {
         return new TimetableError(2);
     }
@@ -84,7 +81,12 @@ export async function getTimetable(schoolCode: number, grade: string, classNum: 
     for (let i = 0; i < lastTimeData[0]; i++) {
         lastTimeDataArr.push(lastTimeData[i + 1].slice(1));
     }
-    const finalData: Timetable = [];
+    const lastUpdated = timetable['자료' + updatedTimeName].split(/[- :]+/).map((x : string) => parseInt(x));
+    lastUpdated[1]--;
+    const finalData: Timetable = {
+        lastUpdated: new Date(...(lastUpdated as [1, 2, 3, 4, 5, 6])),
+        timetable: []
+    };
     for (let i = 0; i < timeDataArr.length; i++) {
         const tmpData = [];
         for (let j = 0; j < timeDataArr[i].length; j++) {
@@ -94,10 +96,10 @@ export async function getTimetable(schoolCode: number, grade: string, classNum: 
                 isChanged: timeDataArr[i][j] !== lastTimeDataArr[i][j]
             });
         }
-        finalData.push(tmpData);
+        finalData.timetable.push(tmpData);
         if (timeDataArr[i].length < lastTimeDataArr[i].length) {
             for (let j = timeDataArr[i].length; j < lastTimeDataArr[i].length; j++) {
-                finalData[finalData.length - 1].push({
+                finalData.timetable[finalData.timetable.length - 1].push({
                     subject: '',
                     teacher: '',
                     isChanged: true

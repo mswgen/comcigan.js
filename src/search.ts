@@ -1,8 +1,8 @@
 import fetch from 'node-fetch';
 import iconv from 'iconv-lite';
-import { SearchError } from './types';
+import { SearchError } from './types.js';
 
-export async function searchSchool(schoolName: string, schoolOrd: string): Promise<number | SearchError> {
+export async function searchSchool(schoolName: string, schoolOrd: number = 1): Promise<number | SearchError> {
     const stuPage = iconv.decode(Buffer.from(await fetch('http://112.186.146.81:4082/st').then(res => res.arrayBuffer())), 'euc-kr');
     const schoolCodeEndpoint = stuPage.match(/function school_ra\(sc\){\$\.ajax\(\{ url:'\.\/[0-9]+\?[0-9]+l\'/g);
     if (!schoolCodeEndpoint) {
@@ -18,9 +18,9 @@ export async function searchSchool(schoolName: string, schoolOrd: string): Promi
     if (schools.length === 0) {
         return new SearchError(1);
     }
-    if (parseInt(schoolOrd) > schools.length) {
+    if (schoolOrd > schools.length) {
         return new SearchError(1);
     }
-    const schoolCode = schools[parseInt(schoolOrd) - 1][3];
+    const schoolCode = schools[schoolOrd - 1][3];
     return schoolCode;
 }
