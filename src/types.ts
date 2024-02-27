@@ -23,7 +23,7 @@ export class TimetableError extends Error {
     ]
     constructor(code: number) {
         super(TimetableError.errorMsgs[code]);
-        this.errorCode = code;
+        this.errorCode = code + 1;
         Object.setPrototypeOf(this, TimetableError.prototype);
     }
 }
@@ -36,7 +36,7 @@ export class SearchError extends Error {
     ]
     constructor(code: number) {
         super(SearchError.errorMsgs[code]);
-        this.errorCode = code;
+        this.errorCode = code + 1;
         Object.setPrototypeOf(this, SearchError.prototype);
     }
 }
