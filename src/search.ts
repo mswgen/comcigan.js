@@ -19,6 +19,6 @@ export async function searchSchool(schoolName: string): Promise<SchoolList> {
     if (schools.length === 0) {
         throw new SearchError(1);
     }
-    const schoolList: SchoolList = schools.map((x: [number, string, string, number]) => ({ name: x[2], code: [3] }));
+    const schoolList: SchoolList = schools.map((x: [number, string, string, number]) => ({ name: x[2], code: x[3] }));
     return schoolList;
 }
