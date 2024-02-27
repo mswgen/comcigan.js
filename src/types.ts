@@ -9,6 +9,15 @@ export type Timetable = {
     >
 };
 
+export type SchoolInfo = {
+    lastUpdated: Date,
+    data: {
+        code: number,
+        grades: number,
+        classes: number
+    }
+};
+
 export type SchoolList = Array<{
     name: string,
     code: number
@@ -18,8 +27,22 @@ export class TimetableError extends Error {
     errorCode: number;
     static errorMsgs = [
         "사이트 코드가 변경되어 정보를 가져올 수 없습니다.",
+        "학교가 존재하지 않습니다",
         "학년이 존재하지 않습니다.",
         "반이 존재하지 않습니다."
+    ]
+    constructor(code: number) {
+        super(TimetableError.errorMsgs[code]);
+        this.errorCode = code + 1;
+        Object.setPrototypeOf(this, TimetableError.prototype);
+    }
+}
+
+export class InfoError extends Error {
+    errorCode: number;
+    static errorMsgs = [
+        "사이트 코드가 변경되어 정보를 가져올 수 없습니다.",
+        "학교가 존재하지 않습니다"
     ]
     constructor(code: number) {
         super(TimetableError.errorMsgs[code]);

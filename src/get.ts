@@ -23,6 +23,9 @@ export async function getTimetable(schoolCode: number, grade: number, classNum: 
         throw new TimetableError(0);
     }
     const timetable = JSON.parse((await fetch(endpoint + '?' + Buffer.from(`${scDataCode[0]}${schoolCode}_0_1`).toString('base64')).then(res => res.text())).replace(/\0/g, ''));
+    if (Object.keys(timetable).length === 0) {
+        throw new TimetableError(1);
+    }
     const updatedTimeNameCode = stuPage.match(/\$\('#수정일'\)\.text\('수정일: '\+H시간표\.자료[0-9]+\);/g);
     if (!updatedTimeNameCode) {
         throw new TimetableError(0);
@@ -33,10 +36,10 @@ export async function getTimetable(schoolCode: number, grade: number, classNum: 
     }
 
     if (grade > timetable.학급수.length - 1) {
-        throw new TimetableError(1);
+        throw new TimetableError(2);
     }
     if (classNum > timetable.학급수[grade] - timetable.가상학급수[grade]) {
-        throw new TimetableError(2);
+        throw new TimetableError(3);
     }
     const separator = timetable.분리;
     const lastDataNameCode = stuPage.match(/원자료=Q자료\(자료\.자료[0-9]+\[학년\]\[반\]\[요일\]\[교시\]\);/g);
