@@ -9,6 +9,11 @@ export type Timetable = {
     >
 };
 
+export type SchoolList = Array<{
+    name: string,
+    code: number
+}>;
+
 export class TimetableError extends Error {
     errorCode: number;
     static errorMsgs = [
