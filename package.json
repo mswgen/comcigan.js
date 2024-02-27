@@ -10,12 +10,10 @@
     "start": "node .",
     "postinstall": "yarn build"
   },
-  "devDependencies": {
-    "@types/node": "^20.11.20",
-    "typescript": "^5.3.3"
-  },
   "dependencies": {
     "iconv-lite": "^0.6.3",
-    "node-fetch": "^3.3.2"
+    "node-fetch": "^3.3.2",
+    "typescript": "^5.3.3",
+    "@types/node": "^20.11.20"
   }
 }
