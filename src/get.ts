@@ -94,7 +94,10 @@ export async function getTimetable(schoolCode: number, grade: number, classNum: 
             tmpData.push({
                 subject: timetable['자료' + subjArrName][Math.floor(timeDataArr[i][j] / separator)],
                 teacher: timetable['자료' + tcrArrName][timeDataArr[i][j] % separator],
-                isChanged: timeDataArr[i][j] !== lastTimeDataArr[i][j]
+                prevData: timeDataArr[i][j] !== lastTimeDataArr[i][j] ? {
+                    subject: timetable['자료' + subjArrName][Math.floor(lastTimeDataArr[i][j] / separator)],
+                    teacher: timetable['자료' + tcrArrName][lastTimeDataArr[i][j] % separator]
+                } : undefined
             });
         }
         finalData.timetable.push(tmpData);
@@ -103,7 +106,10 @@ export async function getTimetable(schoolCode: number, grade: number, classNum: 
                 finalData.timetable[finalData.timetable.length - 1].push({
                     subject: '',
                     teacher: '',
-                    isChanged: true
+                    prevData: {
+                        subject: timetable['자료' + subjArrName][Math.floor(lastTimeDataArr[i][j] / separator)],
+                        teacher: timetable['자료' + tcrArrName][lastTimeDataArr[i][j] % separator]
+                    }
                 });
             }
         }

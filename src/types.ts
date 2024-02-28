@@ -4,7 +4,10 @@ export type Timetable = {
         Array<{
             subject: string,
             teacher: string,
-            isChanged: boolean
+            prevData?: {
+                subject: string,
+                teacher: string
+            }
         }>
     >
 };
@@ -26,10 +29,10 @@ export type SchoolList = Array<{
 export class TimetableError extends Error {
     errorCode: number;
     static errorMsgs = [
-        "사이트 코드가 변경되어 정보를 가져올 수 없습니다.",
-        "학교가 존재하지 않습니다",
-        "학년이 존재하지 않습니다.",
-        "반이 존재하지 않습니다."
+        "Comcigan site has been updated and this module is not compatible with the new site.",
+        "School does not exist.",
+        "Grade does not exist.",
+        "Class does not exist.",
     ]
     constructor(code: number) {
         super(TimetableError.errorMsgs[code]);
@@ -41,8 +44,8 @@ export class TimetableError extends Error {
 export class InfoError extends Error {
     errorCode: number;
     static errorMsgs = [
-        "사이트 코드가 변경되어 정보를 가져올 수 없습니다.",
-        "학교가 존재하지 않습니다"
+        "Comcigan site has been updated and this module is not compatible with the new site.",
+        "School does not exist."
     ]
     constructor(code: number) {
         super(TimetableError.errorMsgs[code]);
@@ -54,8 +57,8 @@ export class InfoError extends Error {
 export class SearchError extends Error {
     errorCode: number;
     static errorMsgs = [
-        "사이트 코드가 변경되어 정보를 가져올 수 없습니다.",
-        "학교가 존재하지 않습니다."
+        "Comcigan site has been updated and this module is not compatible with the new site.",
+        "School does not exist."
     ]
     constructor(code: number) {
         super(SearchError.errorMsgs[code]);

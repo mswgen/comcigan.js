@@ -16,9 +16,6 @@ export async function searchSchool(schoolName: string): Promise<SchoolList> {
     const endpoint = `http://112.186.146.81:4082/${schoolCodeURI[0]}`;
     const schoolListRaw = await fetch(endpoint + `?${schoolCodeURI[1]}l${iconv.encode(schoolName, 'euc-kr').toString('hex').toUpperCase().match(/[0-9A-Z]{2}/g)?.map(x => '%' + x).join('')}`).then(res => res.text());
     const schools = JSON.parse(schoolListRaw.replace(/\0/g, '')).학교검색;
-    if (schools.length === 0) {
-        throw new SearchError(1);
-    }
     const schoolList: SchoolList = schools.filter((x: [number, string, string, number]) => x[3] !== 0).map((x: [number, string, string, number]) => ({ name: x[2], code: x[3] }));
     return schoolList;
 }
