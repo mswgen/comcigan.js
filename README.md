@@ -4,6 +4,16 @@
 
 [컴시간 뷰어](https://comci.eastus.cloudapp.azure.com)([소스 코드](https://github.com/mswgen/comci-viewer))는 이 라이브러리를 사용하여 만들어졌습니다.
 
+## 설치 방법
+NPM을 사용하는 경우
+```bash
+npm i --save comci.js
+```
+Yarn을 사용하는 경우
+```bash
+yarn add comci.js
+```
+
 ## 사용법
 ### 학교 검색하기
 컴시간은 내부적으로 학교 코드를 사용하여 시간표를 가져옵니다. `searchSchool` 함수를 사용하여 학교를 검색할 수 있습니다.

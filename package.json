@@ -8,7 +8,7 @@
   "scripts": {
     "build": "tsc",
     "start": "node .",
-    "postinstall": "yarn build"
+    "prepack": "yarn build"
   },
   "dependencies": {
     "iconv-lite": "^0.6.3",
