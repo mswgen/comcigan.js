@@ -61,7 +61,7 @@ comci.getSchoolInfo(12345).then(info => {
 `getTimetable` 함수를 사용하여 시간표를 가져올 수 있습니다.
 
 ```javascript
-getTimetable(schoolCode: number, grade: number, classNum: number): Promise<SchoolInfo>
+getTimetable(schoolCode: number, grade: number, classNum: number): Promise<Timetable>
 ```
 
 #### 파라미터
