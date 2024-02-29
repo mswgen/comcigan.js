@@ -1,5 +1,9 @@
 export type Timetable = {
     lastUpdated: Date,
+    date: {
+        start: [number, number, number],
+        end: [number, number, number]
+    },
     timetable: Array<
         Array<{
             subject: string,

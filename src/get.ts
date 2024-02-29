@@ -84,8 +84,19 @@ export async function getTimetable(schoolCode: number, grade: number, classNum: 
     for (let i = 0; i < lastTimeData[0]; i++) {
         lastTimeDataArr.push(lastTimeData[i + 1].slice(1));
     }
+    const date = timetable['일자자료'][0][1].split(' ~ ').map((x: string) => x.split('-').map((y: string) => parseInt(y)));
+    date[0][0] += 2000;
+    date[0][1]--;
+    date[1][0] += 2000;
+    date[1][1]--;
+    date[1][2] -= 1;
+    const realDate = [new Date(date[0][0], date[0][1], date[0][2]), new Date(date[1][0], date[1][1], date[1][2])];
     const finalData: Timetable = {
         lastUpdated: new Date(timetable['자료' + updatedTimeName].replace(' ', 'T') + '.000+0900'),
+        date: {
+            start: [realDate[0].getFullYear(), realDate[0].getMonth() + 1, realDate[0].getDate()],
+            end: [realDate[1].getFullYear(), realDate[1].getMonth() + 1, realDate[1].getDate()]
+        },
         timetable: []
     };
     for (let i = 0; i < timeDataArr.length; i++) {
