@@ -21,7 +21,7 @@ export type SchoolInfo = {
     data: {
         code: number,
         grades: number,
-        classes: number
+        classes: Array<number>
     }
 };
 
