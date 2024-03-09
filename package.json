@@ -1,7 +1,7 @@
 {
   "name": "comcigan.js",
   "packageManager": "yarn@4.1.0",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "main": "dist/index.js",
   "description": "JavaScript용 컴시간 파싱 라이브러리",
   "type": "module",
