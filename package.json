@@ -1,14 +1,14 @@
 {
-  "name": "comci.js",
+  "name": "comcigan.js",
   "packageManager": "yarn@4.1.0",
-  "version": "1.0.5",
+  "version": "1.0.0",
   "main": "dist/index.js",
-  "description": "Comcigan Parser Library for JavaScript",
+  "description": "JavaScript용 컴시간 파싱 라이브러리",
   "type": "module",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/mswgen/comci.js.git"
+    "url": "https://github.com/mswgen/comcigan.js.git"
   },
   "scripts": {
     "build": "tsc",
@@ -17,8 +17,10 @@
   },
   "dependencies": {
     "iconv-lite": "^0.6.3",
-    "node-fetch": "^3.3.2",
-    "typescript": "^5.3.3",
-    "@types/node": "^20.11.20"
+    "node-fetch": "^3.3.2"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.25",
+    "typescript": "5.3.3"
   }
 }

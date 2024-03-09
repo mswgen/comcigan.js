@@ -1,4 +1,4 @@
-# comci.js
+# comcigan.js
 ## JavaScript용 컴시간 파싱 라이브러리
 [컴시간](http://112.186.146.81:4082/st)을 사용하는 학교의 시간표를 파싱하는 라이브러리입니다.
 
@@ -7,11 +7,11 @@
 ## 설치 방법
 NPM을 사용하는 경우
 ```bash
-npm i --save comci.js
+npm i --save comcigan.js
 ```
 Yarn을 사용하는 경우
 ```bash
-yarn add comci.js
+yarn add comcigan.js
 ```
 
 ## 사용법
@@ -29,8 +29,8 @@ searchSchool(schoolName: string): Promise<schoolList>
   - `name`(`string`): 학교 이름
   - `code`(`number`): 학교 코드
 ```javascript
-import comci from 'comci.js';
-comci.searchSchool('학교 이름').then(schools => {
+import comcigan from 'comcigan.js';
+comcigan.searchSchool('학교 이름').then(schools => {
   console.log(schools[0].name); // 첫 번째 학교의 이름
   console.log(schools[0].code); // 첫 번째 학교의 코드
 });
@@ -50,8 +50,8 @@ getSchoolInfo(schoolCode: number): Promise<SchoolInfo>
   - `grades`(`number`): 학년 수
   - `classes`(`number[]`): 각 학년별 학급 수
 ```javascript
-import comci from 'comci.js';
-comci.getSchoolInfo(12345).then(info => {
+import comcigan from 'comcigan.js';
+comcigan.getSchoolInfo(12345).then(info => {
   console.log(info.lastUpdated); // 마지막 업데이트 시각
   console.log(info.grades); // 학년 수
   console.log(info.classes); // 각 학년별 학급 수
@@ -83,8 +83,8 @@ getTimetable(schoolCode: number, grade: number, classNum: number): Promise<Timet
         - `teacher`(`string`): 교사 이름
     
 ```javascript
-import comci from 'comci.js';
-comci.getTimetable(12345, 1, 1).then(timetable => {
+import comcigan from 'comcigan.js';
+comcigan.getTimetable(12345, 1, 1).then(timetable => {
   console.log(timetable.lastUpdated); // 마지막 업데이트 시각
   console.log(timetable.date.start); // 시작 날짜
   console.log(timetable.date.end); // 끝 날짜
