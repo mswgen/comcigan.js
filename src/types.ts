@@ -16,12 +16,33 @@ export type Timetable = {
     >
 };
 
+export type TeacherTimetable = {
+    lastUpdated: Date,
+    date: {
+        start: [number, number, number],
+        end: [number, number, number]
+    },
+    timetable: Array<
+        Array<{
+            grade: number,
+            classNum: number,
+            subject: string,
+            prevData?: {
+                grade: number,
+                classNum: number,
+                subject: string
+            }
+        }>
+    >
+}
+
 export type SchoolInfo = {
     lastUpdated: Date,
     data: {
         code: number,
         grades: number,
-        classes: Array<number>
+        classes: Array<number>,
+        teachers: Array<string>
     }
 };
 

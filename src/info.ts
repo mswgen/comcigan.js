@@ -34,12 +34,21 @@ export async function getSchoolInfo(schoolCode: number): Promise<SchoolInfo> {
     if (!updatedTimeName) {
         throw new InfoError(0);
     }
+    const tcrArrNameCode = stuPage.match(/자료\.자료[0-9]+\[th\]/g);
+    if (!tcrArrNameCode) {
+        throw new InfoError(0);
+    }
+    const tcrArrName = tcrArrNameCode[0].match(/[0-9]+/g);
+    if (!tcrArrName) {
+        throw new InfoError(0);
+    }
     return {
         lastUpdated: new Date(rawData['자료' + updatedTimeName].replace(' ', 'T') + '.000+0900'),
         data: {
             code: schoolCode,
             grades: rawData.학급수.length - 1,
-            classes: rawData.학급수.map((x: number, i: number) => x - rawData.가상학급수[i]).slice(1)
+            classes: rawData.학급수.map((x: number, i: number) => x - rawData.가상학급수[i]).slice(1),
+            teachers: rawData['자료' + tcrArrName].slice(1)
         }
     }
 }
