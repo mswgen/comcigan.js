@@ -1,6 +1,6 @@
 # comcigan.js
 ## JavaScript용 컴시간 파싱 라이브러리
-[컴시간](http://112.186.146.81:4082/st)을 사용하는 학교의 시간표를 파싱하는 라이브러리입니다.
+[컴시간](http://comci.net:4082/st)을 사용하는 학교의 시간표를 파싱하는 라이브러리입니다.
 
 [컴시간 뷰어](https://comci.eastus.cloudapp.azure.com)([소스 코드](https://github.com/mswgen/comci-viewer))는 이 라이브러리를 사용하여 만들어졌습니다.
 

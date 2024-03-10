@@ -4,7 +4,7 @@ import { TimetableError } from './types.js';
 import type { TeacherTimetable } from './types.js';
 
 export async function getTeacherTimetable(schoolCode: number, teacher: number): Promise<TeacherTimetable> {
-    const stuPage = iconv.decode(Buffer.from(await fetch('http://112.186.146.81:4082/st').then(res => res.arrayBuffer())), 'euc-kr');
+    const stuPage = iconv.decode(Buffer.from(await fetch('http://comci.net:4082/st').then(res => res.arrayBuffer())), 'euc-kr');
     const schoolCodeEndpoint = stuPage.match(/function school_ra\(sc\){\$\.ajax\(\{ url:'\.\/[0-9]+\?[0-9]+l\'/g);
     if (!schoolCodeEndpoint) {
         throw new TimetableError(0);
@@ -13,7 +13,7 @@ export async function getTeacherTimetable(schoolCode: number, teacher: number): 
     if (!schoolCodeURI || schoolCodeURI.length !== 2) {
         throw new TimetableError(0);
     }
-    const endpoint = `http://112.186.146.81:4082/${schoolCodeURI[0]}`;
+    const endpoint = `http://comci.net:4082/${schoolCodeURI[0]}`;
     const scData = stuPage.match(/sc_data\('[0-9]+_',sc,[0-1],'[0-9]'\)/g);
     if (!scData) {
         throw new TimetableError(0);
