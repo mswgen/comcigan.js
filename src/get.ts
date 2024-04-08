@@ -102,10 +102,11 @@ export async function getTimetable(schoolCode: number, grade: number, classNum: 
     for (let i = 0; i < timeDataArr.length; i++) {
         const tmpData = [];
         for (let j = 0; j < timeDataArr[i].length; j++) {
+            if (timeDataArr[i][j] === 0) continue;
             tmpData.push({
                 subject: timetable['자료' + subjArrName][Math.floor(timeDataArr[i][j] / separator)],
                 teacher: timetable['자료' + tcrArrName][timeDataArr[i][j] % separator],
-                prevData: timeDataArr[i][j] !== lastTimeDataArr[i][j] ? {
+                prevData: (timeDataArr[i][j] !== lastTimeDataArr[i][j] && lastTimeDataArr[i][j] !== 0) ? {
                     subject: timetable['자료' + subjArrName][Math.floor(lastTimeDataArr[i][j] / separator)],
                     teacher: timetable['자료' + tcrArrName][lastTimeDataArr[i][j] % separator]
                 } : undefined
@@ -114,6 +115,7 @@ export async function getTimetable(schoolCode: number, grade: number, classNum: 
         finalData.timetable.push(tmpData);
         if (timeDataArr[i].length < lastTimeDataArr[i].length) {
             for (let j = timeDataArr[i].length; j < lastTimeDataArr[i].length; j++) {
+                if (lastTimeDataArr[i][j] === 0) continue;
                 finalData.timetable[finalData.timetable.length - 1].push({
                     subject: '',
                     teacher: '',
